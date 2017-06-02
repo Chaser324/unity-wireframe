@@ -4,7 +4,7 @@ Shader "SuperSystems/Wireframe-Transparent"
     {
         _WireThickness ("Wire Thickness", RANGE(0, 800)) = 100
         _WireColor ("Wire Color", Color) = (0.0, 1.0, 0.0, 1.0)
-        _BaseColor ("Base Color", Color) = (0.0, 0.0, 0.0, 1.0)
+        _BaseColor ("Base Color", Color) = (0.0, 0.0, 0.0, 0.0)
     }
 
     SubShader
@@ -123,7 +123,6 @@ Shader "SuperSystems/Wireframe-Transparent"
                 // Smooth our line out
                 float t = exp2(-2 * minDistanceToEdge * minDistanceToEdge);
                 fixed4 finalColor = lerp(_BaseColor, _WireColor, t);
-                finalColor.a = t;
 
                 return finalColor;
             }
