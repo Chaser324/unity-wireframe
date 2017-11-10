@@ -10,7 +10,7 @@ These are general purpose wireframe shaders adapted from Unity's built-in Spatia
 
 * Add the `Wireframe` directory to your Unity project's `Assets` directory.
 * To use the wireframe shaders, set your material's shader to `SuperSystems/Wireframe`, `SuperSystems/Wireframe-Transparent`, or `SuperSystems/Wireframe-Transparent-Culled`.
-* To use the replacement shader image effect, add the `WireframeImageEffect` component to your camera.
+* To use the replacement shader image effect, add the `WireframeImageEffect` component to your camera. Some other effects like GlobalFog will interfere with the replacement shaders and will need to be disabled.
 
 ## License
 All code in this repository ([unity-wireframe](https://github.com/Chaser324/unity-wireframe)) is made freely available under the MIT license. This essentially means you're free to use it however you like as long as you provide attribution.
