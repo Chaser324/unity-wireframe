@@ -6,6 +6,10 @@ These are general purpose wireframe shaders adapted from Unity's built-in Spatia
 
 [Unity Forums Thread](https://forum.unity3d.com/threads/free-open-source-generic-wireframe-shaders.473968/)
 
+## Requirements
+
+* These shaders will only work on devices that support at least Shader Model 4.0. Most mobile devices do not meet this requirement.
+
 ## Usage
 
 * Add the `Wireframe` directory to your Unity project's `Assets` directory.
