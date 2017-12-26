@@ -4,24 +4,34 @@ using System.Collections;
 namespace SuperSystems.ImageEffects
 {
 
+[ExecuteInEditMode]
 public class WireframeImageEffect : MonoBehaviour
 {
     public enum WireframeType
     {
         None = 0,
         Solid,
+        ShadedUnlit,
         Transparent,
         TransparentCulled,
         COUNT
     }
 
+    [Header("Replacement Shader")]
     public WireframeType wireframeType = WireframeType.None;
-    public bool setCameraClearColor = true;
-    public float wireThickness = 100;
+    public string replacementTag = "RenderType";
+    public bool cameraBackgroundMatchesBaseColor = true;
+
+    [Header("Wireframe Shader Properties")]
+    [Range(0, 800)]
+    public float wireThickness = 600;
+
+    [Range(0, 20)]
+    public float wireSmoothness = 3;
+
     public Color wireColor = Color.green;
     public Color baseColor = Color.black;
     public float maxTriSize = 25.0f;
-    public string replacementTag = "RenderType";
 
     private Color initialClearColor;
     private CameraClearFlags initialClearFlag;
@@ -45,22 +55,15 @@ public class WireframeImageEffect : MonoBehaviour
     protected void Update()
     {
         Shader.SetGlobalFloat("_WireThickness", wireThickness);
+        Shader.SetGlobalFloat("_WireSmoothness", wireSmoothness);
         Shader.SetGlobalColor("_WireColor", wireColor);
         Shader.SetGlobalColor("_BaseColor", baseColor);
         Shader.SetGlobalFloat("_MaxTriSize", maxTriSize);
 
-        if (wireframeType != WireframeType.None)
+        if (wireframeType != WireframeType.None && cameraBackgroundMatchesBaseColor)
         {
-            if (setCameraClearColor)
-            {
-                cam.backgroundColor = baseColor;
-                cam.clearFlags = CameraClearFlags.SolidColor;
-            }
-            else
-            {
-                cam.backgroundColor = initialClearColor;
-                cam.clearFlags = initialClearFlag;
-            }
+            cam.backgroundColor = baseColor;
+            cam.clearFlags = CameraClearFlags.SolidColor;
         }
 
         ApplyShader();
@@ -75,13 +78,16 @@ public class WireframeImageEffect : MonoBehaviour
             switch (wireframeType)
             {
                 case WireframeType.Solid:
-                    cam.SetReplacementShader(Shader.Find("Hidden/SuperSystems/Wireframe-Global"), replacementTag);
+                    cam.SetReplacementShader(Shader.Find("hidden/SuperSystems/Wireframe-Global"), replacementTag);
+                    break;
+                case WireframeType.ShadedUnlit:
+                    cam.SetReplacementShader(Shader.Find("hidden/SuperSystems/Wireframe-Shaded-Unlit-Global"), replacementTag);
                     break;
                 case WireframeType.Transparent:
-                    cam.SetReplacementShader(Shader.Find("Hidden/SuperSystems/Wireframe-Transparent-Global"), replacementTag);
+                    cam.SetReplacementShader(Shader.Find("hidden/SuperSystems/Wireframe-Transparent-Global"), replacementTag);
                     break;
                 case WireframeType.TransparentCulled:
-                    cam.SetReplacementShader(Shader.Find("Hidden/SuperSystems/Wireframe-Transparent-Culled-Global"), replacementTag);
+                    cam.SetReplacementShader(Shader.Find("hidden/SuperSystems/Wireframe-Transparent-Culled-Global"), replacementTag);
                     break;
                 default:
                     ResetCamera();
