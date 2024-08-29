@@ -10,6 +10,10 @@ These are general purpose wireframe shaders adapted from Unity's built-in Spatia
 
 * These shaders will only work on devices that support at least Shader Model 4.0. Most mobile devices do not meet this requirement.
 
+## Installation
+
+* Download from the package manager using the url: https://github.com/insominx/unity-wireframe.git?path=/Packages/unity-wireframe
+
 ## Usage
 
 * Add the `Wireframe` directory to your Unity project's `Assets` directory.
