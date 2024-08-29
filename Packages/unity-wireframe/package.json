@@ -1,0 +1,16 @@
+{
+  "name": "com.chaser324.unity-wireframe",
+  "version": "1.0.0",
+  "displayName": "Unity Wireframe",
+  "description": "Wireframe shader collection",
+  "unity": "2018.4",
+  "dependencies": {},
+  "samples": [
+    {
+      "displayName": "Examples",
+      "description": "Show shaders in action",
+      "path": "Samples~/Examples"
+    }    
+  ]
+}
+
